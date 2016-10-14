@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1476393006 source:/home/draetus/Desktop/Codeblocks/teste/main.cpp
+	<iostream>
+	<fstream>
+	<string>
+
