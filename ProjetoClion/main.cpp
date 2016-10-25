@@ -1,20 +1,24 @@
 #include <iostream>
 #include "functions.h"
 
-int main()
+int main(int argc, char **argv)
 {
     char opcao;
-    while (opcao != '2')
+    while (opcao != '3')
     {
         std::cout << std::endl << "Selecione a opcao desejada (Informe o numero)" << std::endl;
-        std::cout << "'1' -> Criar Arquivo e Inserir texto" << std::endl << "  exit -> Sai da funcao" << std::endl << "  return -> Volta a funcao de titulo" << std::endl << std::endl;
-        std::cout << "'2' -> Sair do programa" << std::endl;
+        std::cout << "'1' -> Criar arquivo e inserir texto" << std::endl << "  exit -> Sai da funcao" << std::endl << "  return -> Volta a funcao de titulo" << std::endl << std::endl;
+        std::cout << "'2' -> Visualizar arquivo existente" << std::endl << "  exit -> Sai da funcao" << std::endl << std::endl;
+        std::cout << "'3' -> Sair do programa" << std::endl;
         std::cin >> opcao;
         switch(opcao) {
             case '1' :
-                std::cout << "Arquivo Criado com Sucesso: " << std::endl << titulo(opcao) << std::endl;
+                std::cout << titulo(opcao) << std::endl;
                 break;
             case '2' :
+                view(opcao);
+                break;
+            case '3' :
                 std::cout << "Saindo do programa..." << std::endl;
                 break;
             default :
