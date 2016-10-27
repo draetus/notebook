@@ -4,11 +4,6 @@
 int main(int argc, char **argv)
 {
     char opcao;
-    if (argc > 1) {
-        std::cout << "Teste";
-    }
-    else
-    {
         while (opcao != '3') {
             std::cout << std::endl << "Selecione a opcao desejada (Informe o numero)" << std::endl;
             std::cout << "'1' -> Criar arquivo e inserir texto" << std::endl << "  exit -> Sai da funcao" << std::endl
@@ -31,6 +26,5 @@ int main(int argc, char **argv)
                     std::cout << std::endl << "Opcao Invalida " << std::endl;
             }
         }
-    }
     return 0;
 }
