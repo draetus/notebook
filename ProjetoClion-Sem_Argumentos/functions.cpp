@@ -28,12 +28,12 @@ std::string txt(std::string titulocompleto){
 std::string titulo(char x){
     std::string textocompleto,titulocompleto;
     std::cout << "Opcao " << x << std::endl;
-        std::cout << "Informe o Titulo (ou digite exit para sair da funcao): ";
-        std::cin >> titulocompleto;
-        if (titulocompleto != "exit")
-        {
-            textocompleto = txt(titulocompleto);
-        }
+    std::cout << "Informe o Titulo (ou digite exit para sair da funcao): ";
+    std::cin >> titulocompleto;
+    if (titulocompleto != "exit")
+    {
+        textocompleto = txt(titulocompleto);
+    }
 return textocompleto;
 }
 
