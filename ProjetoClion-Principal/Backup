@@ -1,0 +1,184 @@
+Comando para compilar no terminal : g++ functions.cpp main.cpp -o notebook
+                                                                  "Nome do arquivo"
+
+
+
+Versao do main com argumentos:
+
+#include <iostream>
+#include "functions.h"
+
+int main(int argc, char **argv)
+{
+    std::string arg;
+    if (argc > 1) {
+        arg = argv[1];
+        if ((arg == "--new") || (arg == "-n"))
+        {
+            arg = argv[2];
+            std::cout << "Arquivo criado com sucesso" << std::endl << arg << std::endl << txt(arg) << std::endl;
+        }
+        else
+        {
+            if ((arg == "--view") || (arg == "-v"))
+            {
+                arg = argv[2];
+                view(arg);
+            }
+            else
+            {
+                if ((arg == "--help") || (arg == "-h"))
+                {
+                    std::cout << "Comandos Disponiveis: " << std::endl << "-n     --new 'nome do arquivo' -> Criar arquivo e inserir texto" << std::endl;
+                    std::cout << "-v     --view 'nome do arquivo' -> Visualiza arquivo ja existente" << std::endl;
+                }
+                else
+                {
+                    std::cout << "Comando Invalido" << std::endl << "Use --help para ver comandos disponiveis" << std::endl;
+                }
+            }
+        }
+    }
+    else
+    {
+        std::cout << "Argumentos Insuficientes" << std::endl << "Use --help para ver comandos disponiveis" << std::endl;
+    }
+    return 0;
+}
+
+
+
+
+
+//Versao do main sem argumentos:
+
+#include <iostream>
+
+int main(int argc, char **argv)
+{
+    char opcao;
+    if (argc > 1) {
+        std::cout << "Teste";
+    }
+    else
+    {
+        while (opcao != '3') {
+            std::cout << std::endl << "Selecione a opcao desejada (Informe o numero)" << std::endl;
+            std::cout << "'1' -> Criar arquivo e inserir texto" << std::endl << "  exit -> Sai da funcao" << std::endl
+                      << "  return -> Volta a funcao de titulo" << std::endl << std::endl;
+            std::cout << "'2' -> Visualizar arquivo existente" << std::endl << "  exit -> Sai da funcao" << std::endl
+                      << std::endl;
+            std::cout << "'3' -> Sair do programa" << std::endl;
+            std::cin >> opcao;
+            switch (opcao) {
+                case '1' :
+                    std::cout << titulo(opcao) << std::endl;
+                    break;
+                case '2' :
+                    view(opcao);
+                    break;
+                case '3' :
+                    std::cout << "Saindo do programa..." << std::endl;
+                    break;
+                default :
+                    std::cout << std::endl << "Opcao Invalida " << std::endl;
+            }
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+
+Funcao de criar arquivo e inserir texto:
+
+#include <iostream>
+#include <fstream>
+
+std::string txt(std::string titulocompleto){
+    std::string texto,textocompleto;
+    std::ofstream myfile;
+    myfile.open(titulocompleto);
+    std::cout << "Digite o desejado(escreva return para sair): " << std::endl;
+    while(texto != "return")
+    {
+        std::cin >> texto;
+        if (texto != "return")
+        {
+            textocompleto += texto + " ";
+        }
+        if (std::cin.get() == '\n')
+        {
+            textocompleto += '\n';
+        }
+    }
+    myfile << textocompleto;
+    myfile.close();
+    return textocompleto;
+}
+
+
+Funcao de ver arquivo existente
+
+void view(std::string titulo){
+    std::string texto;
+    std::ifstream myfile;
+    std::cout << std::endl << titulo << std::endl << std::endl;
+    myfile.open(titulo);
+    if (myfile.is_open())
+    {
+        while(!myfile.eof())
+        {
+            getline(myfile,texto);
+            std::cout << texto << std::endl;
+        }
+        myfile.close();
+    }
+    else
+    {
+        std::cout << "Arquivo nao existente" << std::endl;
+    }
+}
+
+
+//Funcao de deletar arquivo
+
+void del(std::string titulo){
+    std::ifstream myfile;
+    myfile.open(titulo);
+    if (myfile.is_open())
+    {
+        remove(titulo.c_str());
+        std::cout << "Arquivo excluido com sucesso";
+    }
+    else
+    {
+        std::cout << "Erro ao deletar Arquivo";
+    }
+}
+
+
+void rename(std::string oldname,std::string newname){
+    std::ifstream myfile;
+    myfile.open(oldname);
+    if (myfile.is_open())
+    {
+        if ((rename(oldname.c_str(),newname.c_str())) == 0)
+        {
+            std::cout << "Arquivo renomeado com Sucesso";
+        }
+        else
+        {
+            std::cout << "Falha ao renomear arquivo";
+        }
+    }
+    else
+    {
+        std::cout << "Arquivo nno existente";
+    }
+}
+
+void rename(std::string,std::string); //Funcao para renomear arquivo
